@@ -30,7 +30,10 @@ class _LoginState extends State<LoginScreen> {
     Container headerContainer = Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(10),
-        child: const Text('A title, a logo maybe?'));
+        child: Column(children: <Widget>[
+          Image.network(
+              "https://media.tenor.com/7lR7Bw5AUZcAAAAC/tomboy-anime.gif")
+        ]));
 
     Container titleContainer = Container(
         alignment: Alignment.center,
@@ -44,12 +47,24 @@ class _LoginState extends State<LoginScreen> {
       padding: const EdgeInsets.all(1),
       child: CupertinoTextField(
         controller: usernameController,
-        placeholder: 'Required',
-        prefix: const Text(
-          'Username',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+        placeholder: 'Dios es gay',
+        placeholderStyle: const TextStyle(color: Colors.black54),
+        style: const TextStyle(color: Colors.black),
+        prefix: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const <Widget>[
+            Icon(CupertinoIcons.person_2),
+            VerticalDivider(
+              thickness: 0,
+            ),
+            Text(
+              'Username',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+          ],
         ),
         decoration: const BoxDecoration(),
       ),
@@ -60,17 +75,31 @@ class _LoginState extends State<LoginScreen> {
         child: CupertinoTextField(
           obscureText: true, // dont wanna them to know it uh?
           controller: passwordController,
+          style: const TextStyle(color: Colors.black),
           placeholder: "Required",
-          prefix: const Text(
-            'Password',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          placeholderStyle: const TextStyle(color: Colors.black54),
+          prefix: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const <Widget>[
+              Icon(CupertinoIcons.number_circle),
+              VerticalDivider(
+                thickness: 0,
+              ),
+              Text(
+                'Password',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
           ),
           decoration: const BoxDecoration(),
         ));
     Container usernamePasswordContainer = Container(
       padding: const EdgeInsets.all(16),
       // height: 200,
-      // width: 150,
+      width: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.grey.shade300,

@@ -14,7 +14,7 @@ class StartApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CupertinoApp(
         theme: CupertinoThemeData(
-            brightness: Brightness.light,
+            // brightness: Brightness.light,
             textTheme: CupertinoTextThemeData(
                 textStyle: TextStyle(fontFamily: fontFamily))),
         home: LoginScreen());
