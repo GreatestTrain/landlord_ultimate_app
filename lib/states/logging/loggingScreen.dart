@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // import 'package:http/http.dart' as http;
-import 'package:landlord_ultimate_app/login/log.dart';
-import 'package:landlord_ultimate_app/screens/home/screen.dart';
+import 'package:landlord_ultimate_app/states/logging/log.dart';
+import 'package:landlord_ultimate_app/states/home/homeScreen.dart';
 // Elements of the home screen
 // customizible vars are prefixed by _
 
 String loginAPI = "https://control.uclubperu.com/index.php?signIn=1";
 
-TextEditingController usernameController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
 Logger logger = Logger(loginAPI);
 
 class LoginScreen extends StatefulWidget {
@@ -25,6 +23,11 @@ class _LoginState extends State<LoginScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  void loginFunction(String username, String password) {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const BodyScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     Container headerContainer = Container(
@@ -37,10 +40,12 @@ class _LoginState extends State<LoginScreen> {
 
     Container titleContainer = Container(
         alignment: Alignment.center,
+        width: 150,
+        height: 75,
         padding: const EdgeInsets.all(10),
         child: const Text(
           'Sign in',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 30),
         ));
 
     Container usernameContainer = Container(
@@ -48,6 +53,7 @@ class _LoginState extends State<LoginScreen> {
       child: CupertinoTextField(
         controller: usernameController,
         placeholder: 'Dios es gay',
+        maxLines: 1,
         placeholderStyle: const TextStyle(color: Colors.black54),
         style: const TextStyle(color: Colors.black),
         prefix: Row(
@@ -78,6 +84,9 @@ class _LoginState extends State<LoginScreen> {
           style: const TextStyle(color: Colors.black),
           placeholder: "Required",
           placeholderStyle: const TextStyle(color: Colors.black54),
+          maxLines: 1,
+          onSubmitted: (String value) =>
+              loginFunction(usernameController.text, value),
           prefix: Row(
             mainAxisSize: MainAxisSize.max,
             children: const <Widget>[
@@ -123,7 +132,9 @@ class _LoginState extends State<LoginScreen> {
         CupertinoButton(
             child: const Text("here"),
             onPressed: () {
-              // whats supossed to happen if someone forgots their password
+              Navigator.of(context).push(
+                CupertinoPageRoute(builder: (context) => const ForgotScreen()),
+              );
             })
       ],
     );
@@ -138,10 +149,8 @@ class _LoginState extends State<LoginScreen> {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.white)),
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => const BodyApp()));
-          },
+          onPressed: () =>
+              loginFunction(usernameController.text, passwordController.text),
         ));
 
     Row signupButton = Row(
@@ -151,7 +160,9 @@ class _LoginState extends State<LoginScreen> {
         CupertinoButton(
           child: const Text("Sign up here"),
           onPressed: () {
-            // whats supossed to happen if someone forgots their password
+            Navigator.of(context).push(
+              CupertinoPageRoute(builder: (context) => const SignupScreen()),
+            );
           },
         )
       ],
@@ -163,14 +174,14 @@ class _LoginState extends State<LoginScreen> {
         children: <Widget>[
           headerContainer,
           titleContainer,
-          const SizedBox(width: 10),
+          // const SizedBox(width: 10),
           // usernameContainer,
           // passwordContainer,
           usernamePasswordContainer,
           forgotText,
           loginContainer,
           Container(
-            height: 150,
+            height: 100,
             alignment: Alignment.bottomCenter,
             child: signupButton,
           ),
@@ -179,5 +190,47 @@ class _LoginState extends State<LoginScreen> {
     );
 
     return body;
+  }
+}
+
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+  @override
+  State<SignupScreen> createState() => _SignupState();
+}
+
+class _SignupState extends State<SignupScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return const CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text('Sign up'),
+        ),
+        child: Text("sameshit as login"));
+  }
+}
+
+class ForgotScreen extends StatefulWidget {
+  const ForgotScreen({super.key});
+  @override
+  State<ForgotScreen> createState() => _ForgotState();
+}
+
+class _ForgotState extends State<ForgotScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return const CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text('sadsadnoqnd'),
+        ),
+        child: Text("???"));
+  }
+}
+
+class LoggingPage extends StatelessWidget {
+  const LoggingPage({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return const CupertinoPageScaffold(child: LoginScreen());
   }
 }
