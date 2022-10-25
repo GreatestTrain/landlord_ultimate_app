@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:landlord_ultimate_app/screens/home/screen.dart';
 import 'package:landlord_ultimate_app/screens/loginScreen.dart';
 // import 'package:get/get.dart';
 // import 'package:lottie/lottie.dart';
@@ -13,11 +14,13 @@ class StartApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
-        theme: CupertinoThemeData(
-            // brightness: Brightness.light,
-            textTheme: CupertinoTextThemeData(
-                textStyle: TextStyle(fontFamily: fontFamily))),
-        home: LoginScreen());
+      theme: CupertinoThemeData(
+          // barBackgroundColor: Colors.blue,
+          // brightness: Brightness.light,
+          textTheme: CupertinoTextThemeData(
+              textStyle: TextStyle(fontFamily: fontFamily))),
+      home: LoginScreen(),
+    );
   }
 }
 

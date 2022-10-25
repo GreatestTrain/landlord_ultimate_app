@@ -79,7 +79,7 @@ class _LoginState extends State<LoginScreen> {
           placeholder: "Required",
           placeholderStyle: const TextStyle(color: Colors.black54),
           prefix: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             children: const <Widget>[
               Icon(CupertinoIcons.number_circle),
               VerticalDivider(
@@ -99,7 +99,7 @@ class _LoginState extends State<LoginScreen> {
     Container usernamePasswordContainer = Container(
       padding: const EdgeInsets.all(16),
       // height: 200,
-      width: 150,
+      width: 400,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.grey.shade300,
@@ -116,50 +116,64 @@ class _LoginState extends State<LoginScreen> {
       ),
     );
 
-    TextButton forgotText = TextButton(
-      onPressed: () {
-        //forgot password redirection
-      },
-      child: const Text(
-        'Forgot Password',
-      ),
+    Row forgotText = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        const Text('Password issue?'),
+        CupertinoButton(
+            child: const Text("here"),
+            onPressed: () {
+              // whats supossed to happen if someone forgots their password
+            })
+      ],
     );
 
     Container loginContainer = Container(
         height: 50,
+        width: 200,
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-        child: ElevatedButton(
-          child: const Text('Login'),
+        child: CupertinoButton.filled(
+          child: const Text('Login',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white)),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const BodyApp()));
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => const BodyApp()));
           },
         ));
 
     Row signupButton = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Text('Do not have an account?'),
-        TextButton(
-          child: const Text('Sign in'),
+        const Text('Do not have an account'),
+        CupertinoButton(
+          child: const Text("Sign up here"),
           onPressed: () {
-            //signup redirection
+            // whats supossed to happen if someone forgots their password
           },
         )
       ],
     );
 
     Padding body = Padding(
-      padding: const EdgeInsets.all(10),
-      child: ListView(
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+      child: Column(
         children: <Widget>[
           headerContainer,
           titleContainer,
+          const SizedBox(width: 10),
           // usernameContainer,
           // passwordContainer,
           usernamePasswordContainer,
           forgotText,
           loginContainer,
-          signupButton
+          Container(
+            height: 150,
+            alignment: Alignment.bottomCenter,
+            child: signupButton,
+          ),
         ],
       ),
     );
